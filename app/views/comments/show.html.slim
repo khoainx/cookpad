@@ -1,0 +1,14 @@
+p#notice = notice
+
+p
+  strong Photo:
+  = @comment.photo_id
+p
+  strong User:
+  = @comment.user_id
+p
+  strong Content:
+  = @comment.content
+- if can? :manage, photo
+  = link_to 'Edit', edit_comment_path(@comment), class: 'btn btn-warning'
+= link_to 'Back', comments_path, class: 'btn btn-default'

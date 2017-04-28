@@ -3,6 +3,19 @@ p#notice
 .photo-detail
   = image_tag @photo.image.url
   br
+  h3 Comments:
+  .comment-contents
+    - @comments.each do |comment|
+      p
+        strong #{ comment.user.email }:&nbsp
+        | #{ comment.content }
+      - if can? :manage, comment
+        = link_to 'Edit', edit_comment_path(comment), class: 'btn btn-warning'
+        = link_to 'Delete', comment_path(comment), data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
+  br
+  = link_to 'Share on Facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + @photo.image.url, class: 'btn btn-blue', target: '_blank'
+  = link_to 'Add comment', new_comment_path(photo_id: @photo.id), class: 'btn btn-success'
+  br
   - if can? :manage, @photo
     = link_to 'Edit', edit_photo_path(@photo), class: 'btn btn-warning'
   - else
@@ -11,5 +24,4 @@ p#notice
       | Owner: &nbsp
     = @photo.user.email
     br
-  = link_to 'Share on Facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + @photo.image.url, class: 'btn btn-blue', target: '_blank'
   = link_to 'Back', photos_path, class: 'btn btn-default'
