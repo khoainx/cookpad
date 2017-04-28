@@ -1,0 +1,20 @@
+.photo-contents
+  p#notice
+    = notice
+  h1
+    | Photos
+  .btn-new-photo
+    = link_to 'New Photo', new_photo_path, class: 'btn btn-green'
+  br
+  - @photos.each do |photo|
+    .col-sm-04.photo-element
+      = link_to image_tag(photo.image.url(:medium)), photo
+      br
+      = link_to 'https://www.facebook.com/sharer/sharer.php?u=' + photo.image.url, class: 'btn btn-blue', target: '_blank' do
+          i.fa.fa-facebook-official
+      h5 Owner: #{ photo.user.email }
+
+      = link_to 'Show', photo, class: 'btn btn-info'
+      - if can? :manage, photo
+        = link_to 'Edit', edit_photo_path(photo), class: 'btn btn-warning'
+        = link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'

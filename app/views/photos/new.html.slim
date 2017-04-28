@@ -1,0 +1,5 @@
+.new-photo
+  h1
+    | New Photo
+  = render 'form', photo: @photo
+  = link_to 'Back', photos_path, class: 'btn btn-default'

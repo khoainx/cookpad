@@ -1,0 +1,15 @@
+p#notice
+  = notice
+.photo-detail
+  = image_tag @photo.image.url
+  br
+  - if can? :manage, @photo
+    = link_to 'Edit', edit_photo_path(@photo), class: 'btn btn-warning'
+  - else
+    p
+    strong
+      | Owner: &nbsp
+    = @photo.user.email
+    br
+  = link_to 'Share on Facebook', 'https://www.facebook.com/sharer/sharer.php?u=' + @photo.image.url, class: 'btn btn-blue', target: '_blank'
+  = link_to 'Back', photos_path, class: 'btn btn-default'
