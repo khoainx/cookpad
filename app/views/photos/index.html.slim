@@ -10,8 +10,8 @@
     .col-sm-04.photo-element
       = link_to image_tag(photo.image.url(:medium)), photo
       br
-      = link_to 'https://www.facebook.com/sharer/sharer.php?u=' + photo.image.url, class: 'btn btn-blue', target: '_blank' do
-          i.fa.fa-facebook-official
+      = link_to 'https://www.facebook.com/sharer/sharer.php?u=' + URI.join(request.base_url, photo.image.url).to_s, class: 'btn btn-blue', target: '_blank' do
+        i.fa.fa-facebook-official
       h5 Owner: #{ photo.user.email }
 
       = link_to 'Show', photo, class: 'btn btn-info'
